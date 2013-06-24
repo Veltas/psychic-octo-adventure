@@ -57,9 +57,5 @@ def add_new_game():
     else:
       return jsonify({ "error" : "Game exists already in db" })
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
 if __name__ == '__main__':
     app.run(port=PORT, debug=True, host='0.0.0.0')
