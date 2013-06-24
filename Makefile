@@ -1,0 +1,3 @@
+run:
+	./psychic.py
+
