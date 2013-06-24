@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///%s" % DB
 db = SQLAlchemy(app)
-
 
 user_game = db.Table('UserGame',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -19,7 +18,6 @@ class User(db.Model):
     name = db.Column(db.Integer, unique=True)
     steam_name = db.Column(db.String(80), unique=True)
     games = db.relationship('Game', secondary=user_game)
-
 
     def __init__(self, name, steam_name):
         self.name = name
@@ -39,6 +37,10 @@ class Game(db.Model):
 
     def __repr__(self):
         return '<Game %r>' % self.name
+
+@app.route('/game', methods=['GET'])
+def get_all_games():
+    return jsonify(User.query.all())
 
 @app.route('/')
 def hello_world():
