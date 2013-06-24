@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import *
 
@@ -38,9 +38,24 @@ class Game(db.Model):
     def __repr__(self):
         return '<Game %r>' % self.name
 
+    def serialise(self):
+        return { "id" : self.id, "name" : self.name, "free" : self.free }
+
 @app.route('/game', methods=['GET'])
 def get_all_games():
-    return jsonify(User.query.all())
+    games = Game.query.order_by(Game.name).all()
+    return jsonify({ "games" : [game.serialise() for game in games] })
+
+@app.route('/game', methods=['POST'])
+def add_new_game():
+    new_game = request.form['name']
+    if Game.query.filter_by(name=new_game).first() is None:
+      game = Game(new_game)
+      db.session.add(game)
+      db.session.commit()
+      return jsonify({ "success" : "Successfully added game" })
+    else:
+      return jsonify({ "error" : "Game exists already in db" })
 
 @app.route('/')
 def hello_world():
