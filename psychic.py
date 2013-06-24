@@ -26,6 +26,10 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+    def serialise(self):
+        return {  "games" : [game.serialise() for game in self.games],
+                  "name" : self.name, "steam_name" : self.steam_name }
+
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Integer, unique=True)
@@ -45,6 +49,11 @@ class Game(db.Model):
 def get_all_games():
     games = Game.query.order_by(Game.name).all()
     return jsonify({ "games" : [game.serialise() for game in games] })
+
+@app.route('/all', methods=['GET'])
+def get_all_users_with_games():
+    users = User.query.order_by(User.name).all()
+    return jsonify({"data" : [user.serialise() for user in users]})
 
 @app.route('/game', methods=['POST'])
 def add_new_game():
