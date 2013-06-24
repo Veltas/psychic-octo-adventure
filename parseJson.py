@@ -7,8 +7,8 @@ with open('data.json') as data_file:
 
 gamesTable = {}
 
-for x in data["Users"]:
-  for y in x["wantToPlay"]:
+for x in data["data"]:
+  for y in x["games"]:
     if y["name"] in gamesTable:
         gamesTable[y["name"]] += 1
     else:
