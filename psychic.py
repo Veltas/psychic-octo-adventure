@@ -1,9 +1,34 @@
 #!/usr/bin/env python
 
 from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
 from config import *
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = DB
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    name = db.Column(db.Integer, primary_key=True, unique=True)
+    steam_name = db.Column(db.String(80), unique=True)
+
+    def __init__(self, name, steam_name):
+        self.name = name
+        self.steam_name = steam_name
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+class Game(db.Model):
+    name = db.Column(db.Integer, primary_key=True, unique=True)
+    free = db.Column(db.Boolean, unique=True)
+
+    def __init__(self, name, free=False):
+        self.name = name
+        self.free = free
+
+    def __repr__(self):
+        return '<Game %r>' % self.name
 
 @app.route('/')
 def hello_world():
@@ -11,4 +36,3 @@ def hello_world():
 
 if __name__ == '__main__':
     app.run(port=PORT)
-
