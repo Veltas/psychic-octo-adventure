@@ -5,12 +5,21 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from config import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = DB
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///%s" % DB
 db = SQLAlchemy(app)
 
+
+user_game = db.Table('UserGame',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('game_id', db.Integer, db.ForeignKey('game.id'))
+)
+
 class User(db.Model):
-    name = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Integer, unique=True)
     steam_name = db.Column(db.String(80), unique=True)
+    games = db.relationship('Game', secondary=user_game)
+
 
     def __init__(self, name, steam_name):
         self.name = name
@@ -20,7 +29,8 @@ class User(db.Model):
         return '<User %r>' % self.username
 
 class Game(db.Model):
-    name = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Integer, unique=True)
     free = db.Column(db.Boolean, unique=True)
 
     def __init__(self, name, free=False):
