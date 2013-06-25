@@ -3,11 +3,11 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.js"></script>
-    <script src="project.js"></script>
+    <script src="static/project.js"></script>
   </head>
   <body>
     <div ng-controller="GameCtrl">
-      <h1 ng-repeat="game in games.games">Hello {{game.name}}!</h1>
+        <h1 ng-repeat="game in games.games">Hello {{ '{{' }}game.name{{ '}}' }}!</h1>
     </div>
   </body>
 </html>

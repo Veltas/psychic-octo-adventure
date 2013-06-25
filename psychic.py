@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import *
 
@@ -65,6 +65,10 @@ def add_new_game():
       return jsonify({ "success" : "Successfully added game" })
     else:
       return jsonify({ "error" : "Game exists already in db" })
+
+@app.route('/', methods=['GET'])
+def root_route():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(port=PORT, debug=True, host='0.0.0.0')
