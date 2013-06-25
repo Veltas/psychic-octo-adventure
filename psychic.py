@@ -15,7 +15,7 @@ user_game = db.Table('UserGame',
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer, unique=True)
+    name = db.Column(db.String(80), unique=True)
     steam_name = db.Column(db.String(80), unique=True)
     games = db.relationship('Game', secondary=user_game)
 
@@ -32,7 +32,7 @@ class User(db.Model):
 
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer, unique=True)
+    name = db.Column(db.String(80), unique=True)
     free = db.Column(db.Boolean)
 
     def __init__(self, name, free=False):
