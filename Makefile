@@ -18,7 +18,7 @@ fetch-users: create-db
 		sed 's/title=//g' | \
 		sed "s/\" \"/'\n'/g" | tr \" \' | \
 		sed -n '2,$$p' | sed 's/^/insert into user (name) values (/;s/$$/);/' | \
-		sort -u | sqlite3 temp.db
+		sort -u | sqlite3 $(DBNAME)
 
 clean:
 	find . -name '*.pyc' -delete
