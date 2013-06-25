@@ -4,3 +4,6 @@ run:
 ready:
 	sudo apt-get install python-sqlalchemy python-flask
 	cp -n config.py.template config.py
+
+clean:
+	find . -name '*.pyc' | xargs rm
