@@ -6,8 +6,8 @@
     <script src="project.js"></script>
   </head>
   <body>
-    <div ng-controller="TodoCtrl">
-      <h1>Hello {{todos.length}}!</h1>
+    <div ng-controller="GameCtrl">
+      <h1 ng-repeat="game in games.games">Hello {{game.name}}!</h1>
     </div>
   </body>
 </html>
