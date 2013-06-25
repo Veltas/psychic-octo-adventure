@@ -55,6 +55,16 @@ def get_all_users_with_games():
     users = User.query.order_by(User.name).all()
     return jsonify({"data" : [user.serialise() for user in users]})
 
+@app.route('/game/<int:game_id>', methods=['DELETE'])
+def remove_game(game_id):
+    game = Game.query.order_by(Game.name).get(game_id)
+    if game is not None:
+        db.session.delete(game)
+        db.session.commit()
+	return jsonify({"deleted" : game.name})
+    else:
+        return jsonify({"error" : "no id"})
+
 @app.route('/game', methods=['POST'])
 def add_new_game():
     if "name" not in request.form.keys():

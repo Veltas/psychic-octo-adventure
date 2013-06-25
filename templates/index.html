@@ -28,7 +28,9 @@
           <div class="row">
               <div ng-controller="GameCtrl" class="span6" id="gamectrl">
                   <ul>
-                      <li ng-repeat="game in games.games">Goodbye {{game.name}}!</li>
+                      <li ng-repeat="game in games.games">Goodbye {{game.name}}! 
+                          <a class="remove_link" href="" ng-click="removeGame(game.id)">[remove]</a>
+                      </li>
                   </ul>
               </div>
               <div class="span6">
