@@ -57,9 +57,14 @@ def get_all_users_with_games():
 
 @app.route('/game', methods=['POST'])
 def add_new_game():
-    new_game = request.form['name']
+    if "name" not in request.form.keys():
+      return jsonify({ "error" : "Please specify name of game" })
+
+    new_game = request.form["name"]
+    free_to_play = "free_to_play" in request.form.keys()
+
     if Game.query.filter_by(name=new_game).first() is None:
-      game = Game(new_game)
+      game = Game(new_game, free_to_play)
       db.session.add(game)
       db.session.commit()
       return jsonify({ "success" : "Successfully added game" })
