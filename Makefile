@@ -5,9 +5,10 @@ run:
 	./psychic.py
 
 ready:
-	sudo apt-get install python-sqlalchemy python-flask
+	sudo apt-get install python-sqlalchemy python-flask sqlite3 python-setuptools
 	[ -f config.py ] || cp -n config.py.template config.py && \
 		sed -i 's/^DB=/&'\''$(DBNAME)'\'/ config.py
+	easy_install --user flask-sqlalchemy
 
 create-db:
 	python -c 'from psychic import db; db.create_all()'
