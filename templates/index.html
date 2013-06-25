@@ -2,20 +2,34 @@
 <!doctype html>
 <html ng-app="POA">
   <head>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.js"></script>
     <script src="static/project.js"></script>
   </head>
   <body>
-    <div ng-controller="GameCtrl">
-        <h1 ng-repeat="game in games.games">Hello {{game.name}}!</h1>
-    </div>
-    <p>Create a game</p>
-    <form name="add game" action="game">
-    Name: <input type="text" name="name"><br>
-    <input type="checkbox" name="free_to_play" value="free_to_play">Free to play<br>
-    <input type="submit" value="Add game">
-    </form>
+      <div class="container">
+          <div class="row">
+              <div ng-controller="GameCtrl" class="span6">
+                  <ul>
+                      <li ng-repeat="game in games.games">Goodbye {{game.name}}!</li>
+                  </ul>
+              </div>
+              <div class="span6">
+                  <h2>Create a game</h2>
+                  <form name="add_game" action="game" method="POST" class="form-horizontal">
+                      <fieldset>
+                          <label for="name">Name</label>
+                          <input type="text" name="name" placeholder="DOTAAAAAAAAAR"/>
+                          <label class="checkbox">
+                              <input type="checkbox" name="free_to_play"/>Free to play
+                          </label>
+                          <button type="submit" class="btn">Add game</button>
+                      </fieldset>
+                  </form>
+              </div>
+          </div>
+      </div>
   </body>
 </html>
 {% endraw %}
