@@ -1,11 +1,11 @@
 angular.module('POA', ['ngResource']);
 function GameCtrl($scope, $resource) {
     var GameService = $resource('../game');
-    function fill() {
+    $scope.fill = function() {
         $scope.games = GameService.get();
     }
-    fill();
-    setInterval(fill, 5000);
+    $scope.fill();
+    setInterval($scope.fill, 5000);
 }
 
 

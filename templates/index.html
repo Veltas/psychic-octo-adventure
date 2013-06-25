@@ -5,19 +5,35 @@
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="static/jquery.form.min.js"></script>
     <script src="static/project.js"></script>
+    <script>
+        $(function() {
+            $('#add_game').ajaxForm({
+                success: function(resp) {
+                    if (resp['success'])
+                        msg = resp['success'];
+                    else
+                        msg = resp['error'];
+                    $('#addresp').text(msg);
+                    angular.element($('#gamectrl')[0]).scope().fill();
+                }
+            });
+        });
+    </script>
   </head>
   <body>
       <div class="container">
           <div class="row">
-              <div ng-controller="GameCtrl" class="span6">
+              <div ng-controller="GameCtrl" class="span6" id="gamectrl">
                   <ul>
                       <li ng-repeat="game in games.games">Goodbye {{game.name}}!</li>
                   </ul>
               </div>
               <div class="span6">
                   <h2>Create a game</h2>
-                  <form name="add_game" action="game" method="POST" class="form-horizontal">
+                  <form id="add_game" action="game" method="POST" class="form-horizontal">
                       <fieldset>
                           <label for="name">Name</label>
                           <input type="text" name="name" placeholder="DOTAAAAAAAAAR"/>
@@ -27,6 +43,7 @@
                           <button type="submit" class="btn">Add game</button>
                       </fieldset>
                   </form>
+                  <p id="addresp"/>
               </div>
           </div>
       </div>
