@@ -10,6 +10,12 @@
     <div ng-controller="GameCtrl">
         <h1 ng-repeat="game in games.games">Hello {{game.name}}!</h1>
     </div>
+    <p>Create a game</p>
+    <form name="add game" action="game">
+    Name: <input type="text" name="name"><br>
+    <input type="checkbox" name="free_to_play" value="free_to_play">Free to play<br>
+    <input type="submit" value="Add game">
+    </form>
   </body>
 </html>
 {% endraw %}
