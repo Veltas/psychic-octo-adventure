@@ -1,3 +1,4 @@
+{% raw %}
 <!doctype html>
 <html ng-app="POA">
   <head>
@@ -7,7 +8,8 @@
   </head>
   <body>
     <div ng-controller="GameCtrl">
-        <h1 ng-repeat="game in games.games">Hello {{ '{{' }}game.name{{ '}}' }}!</h1>
+        <h1 ng-repeat="game in games.games">Hello {{game.name}}!</h1>
     </div>
   </body>
 </html>
+{% endraw %}
