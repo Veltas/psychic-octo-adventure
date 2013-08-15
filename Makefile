@@ -5,7 +5,7 @@ run:
 	./psychic.py
 
 ready:
-	sudo apt-get install python-sqlalchemy python-flask sqlite3 python-setuptools curl
+	sudo apt-get install python-sqlalchemy python-flask sqlite3 python-setuptools curl libxml2-utils
 	[ -f config.py ] || cp -n config.py.template config.py && \
 		sed -i 's/^DB=/&'\''$(DBNAME)'\'/ config.py
 	easy_install --user flask-sqlalchemy
@@ -26,3 +26,4 @@ clean:
 
 destroy: clean
 	rm -f temp.db config.py
+	
