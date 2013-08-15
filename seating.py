@@ -3,10 +3,11 @@
 #Small python script which produces a geographically accurate
 #map of LAN, with a small table allocated to each person
 
-import urllib2 
+from config import *
+import urllib2
 
 #get the data
-raw = urllib2.urlopen("http://www.uwcs.co.uk/events/seating/1560/")
+raw = urllib2.urlopen("http://www.uwcs.co.uk/events/seating/%r/" % EVENT)
 source = raw.read()
 
 source = source.splitlines(True)

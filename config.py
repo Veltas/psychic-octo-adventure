@@ -1,5 +1,5 @@
 PORT=5555
 # Database filename
-DB=
+DB='temp.db'
 # Event ID on uwcs.co.uk
-EVENT=
+EVENT=1560

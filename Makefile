@@ -1,3 +1,4 @@
+#Mirror in config.py!!!
 EVENTID ?= 1560
 DBNAME ?= temp.db
 
